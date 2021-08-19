@@ -28,6 +28,7 @@ public class ArabskeRimskeKonvertor {
     }
     
     public static String arabskeNaRimske(int arabskeCislo) {
+        //arabske cislo berieme len z rozsahu 1-4999
         if(arabskeCislo > 0 && arabskeCislo < 5000) {
             //polia arabskych cisel a im prisluchajucich rimskych cisel
             int[] arabske = new int[]{1000,900,500,400,100,90,50,40,10,9,5,4,1};
@@ -38,7 +39,7 @@ public class ArabskeRimskeKonvertor {
             while(arabskeCislo > 0 && i < arabske.length) {
                 //kym je cislo v poli arabskych cisel na pozicii i mensie ako zadane arabske cislo
                 //tak sa k rimskemu cislu prida prislusna cislica a odcita sa od arabskeho cisla
-                //odcitava sa kym nie je vstupne cislo 0 (podmienka vo while)
+                //odcitava sa kym nie je vstupne cislo 0 (podmienka vo while) - to znamena, ze cele cislo bolo spracovane
                 if (arabskeCislo >= arabske[i]) {
                     rimskeCislo += rimske[i];
                     arabskeCislo -= arabske[i];
@@ -61,9 +62,9 @@ public class ArabskeRimskeKonvertor {
             char pismeno = rimskeCislo.charAt(i);
             //ciselna reprezentacia rimskej cislice
             int cislo = rimskaCislicaNaCislo(pismeno);
-            //ak nebude vystup z funkcie rimskaCislicaNaCislo -404, teda sa nenajde neplatny znak, pokracuje sa
-            if(cislo > 0) {
+            if(cislo > 0) { //ak nebude vystup z funkcie rimskaCislicaNaCislo -404, teda sa nenajde neplatny znak, pokracuje sa
                 arabskeCislo += cislo;
+                //od prvej pozicie vyssie sa berie do uvahy aj predchadzajuce pismeno
                 if(i > 0) {
                     char predchPismeno = rimskeCislo.charAt(i - 1);
                     int predchCislo =  rimskaCislicaNaCislo(predchPismeno);
